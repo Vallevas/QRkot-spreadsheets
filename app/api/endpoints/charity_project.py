@@ -30,7 +30,7 @@ SessionDep = Annotated[AsyncSession, Depends(get_async_session)]
     '/',
     response_model=CharityProjectDB,
     response_model_exclude_none=True,
-    dependencies=[Depends(current_superuser)],
+    dependencies=(Depends(current_superuser),),
 )
 async def create_charity_project(
     charity_project: CharityProjectCreate,
@@ -67,7 +67,7 @@ async def get_all_charity_projects(session: SessionDep):
     '/{project_id}',
     response_model=CharityProjectDB,
     response_model_exclude_none=True,
-    dependencies=[Depends(current_superuser)],
+    dependencies=(Depends(current_superuser),),
 )
 async def update_charity_project(
     project_id: int,
@@ -101,7 +101,7 @@ async def update_charity_project(
     '/{project_id}',
     response_model=CharityProjectDB,
     response_model_exclude_none=True,
-    dependencies=[Depends(current_superuser)],
+    dependencies=(Depends(current_superuser),),
 )
 async def remove_charity_project(
     project_id: int,

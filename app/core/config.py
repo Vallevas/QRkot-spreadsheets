@@ -12,6 +12,8 @@ class Settings(BaseSettings):
     secret: str = 'SECRET'
     first_superuser_email: EmailStr | None = None
     first_superuser_password: str | None = None
+    yandex_disk_token: str | None = None
+    report_format: str = '%d.%m.%Y %H:%M:%S'
 
     model_config = SettingsConfigDict(env_file='.env')
 

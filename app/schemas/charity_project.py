@@ -4,6 +4,8 @@ from pydantic import BaseModel, ConfigDict, Field, PositiveInt, field_validator
 
 
 class CharityProjectBase(BaseModel):
+    """Base representation schema for a charity project."""
+
     name: str | None = Field(None, min_length=5, max_length=100)
     description: str | None = Field(None, min_length=10)
     full_amount: PositiveInt | None = None
@@ -12,12 +14,16 @@ class CharityProjectBase(BaseModel):
 
 
 class CharityProjectCreate(CharityProjectBase):
+    """Representation schema for creating a charity project."""
+
     name: str = Field(..., min_length=5, max_length=100)
     description: str = Field(..., min_length=10)
     full_amount: PositiveInt
 
 
 class CharityProjectUpdate(CharityProjectBase):
+    """Representation schema for updating a charity project."""
+
     @field_validator('name')
     @classmethod
     def name_cannot_be_null(cls, project_name):
@@ -28,6 +34,8 @@ class CharityProjectUpdate(CharityProjectBase):
 
 
 class CharityProjectDB(CharityProjectCreate):
+    """Representation schema for charity project responses."""
+
     id: int
     invested_amount: int
     fully_invested: bool

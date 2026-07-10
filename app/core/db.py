@@ -15,6 +15,8 @@ class Base(DeclarativeBase):
 
 
 class CommonMixin:
+    """Mixin for automatatic tablename setting and ID field."""
+
     @declared_attr
     def __tablename__(cls):
         return cls.__name__.lower()

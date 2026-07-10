@@ -48,7 +48,7 @@ async def create_donation(
     '/',
     response_model=list[DonationFullInfoDB],
     response_model_exclude_none=True,
-    dependencies=[Depends(current_superuser)],
+    dependencies=(Depends(current_superuser),),
 )
 async def get_all_donations(session: SessionDep):
     """Show the list of all donations.
