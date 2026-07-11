@@ -94,11 +94,11 @@ class YandexDiskClient:
                 headers=self.headers,
                 params={'path': f'disk:/{folder}'},
             )
-            response.raise_for_status()
         except httpx.HTTPStatusError as error:
             # 409 значит, что папка уже существует — это не ошибка.
             if error.response.status_code != status.HTTP_409_CONFLICT:
                 raise
+        response.raise_for_status()
 
 
 async def get_yandex_client():

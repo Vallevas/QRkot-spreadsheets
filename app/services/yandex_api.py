@@ -78,8 +78,9 @@ async def create_simple_report(
         row += 1
 
     # Итоговая строка — после всех данных.
+    projects_total = len(projects)
     worksheet.merge_range(
-        row, 0, row, 2, f'Всего проектов: {len(projects)}', total_format
+        row, 0, row, 2, f'Всего проектов: {projects_total}', total_format
     )
 
     worksheet.set_column('A:A', 25)

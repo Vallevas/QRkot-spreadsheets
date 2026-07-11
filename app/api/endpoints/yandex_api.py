@@ -18,14 +18,13 @@ router = APIRouter()
     response_model=str,
     dependencies=(Depends(current_superuser),),
     summary='Создать Excel-отчёт на Яндекс Диске',
-    description="""
-    Создаёт Excel-файл с отчётом по закрытым целевым проектам,
-    отсортированным по скорости сбора средств. Файл сохраняется на
-    Яндекс Диске в папке "QRKot Reports" и становится доступен по
-    публичной ссылке.
-
-    Требуются права суперпользователя.
-    """,
+    description=(
+        'Создаёт Excel-файл с отчётом по закрытым целевым проектам,'
+        'отсортированным по скорости сбора средств. Файл сохраняется на'
+        'Яндекс Диске в папке "QRKot Reports" и становится доступен по'
+        'публичной ссылке. \n\n'
+        'Требуются права суперпользователя.'
+    ),
 )
 async def get_report(
     session: Annotated[AsyncSession, Depends(get_async_session)],
@@ -42,9 +41,9 @@ async def get_report(
         )
     try:
         public_url = await create_simple_report(projects, yandex_client)
-        return public_url
     except Exception as error:
         raise HTTPException(
             status_code=HTTPStatus.INTERNAL_SERVER_ERROR,
             detail=f'Ошибка при создании отчёта: {error}',
         ) from error
+    return public_url
